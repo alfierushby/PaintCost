@@ -19,3 +19,8 @@ if __name__ == '__main__':
 
     paint_area += get_named_dimension("Ceiling")
 
+    response = str(input("Do you want to add any obstructions on your walls that you won't paint? (Y or N)")).upper()
+    if response == "Y":
+        obstructions = True
+        while obstructions:
+            paint_area += get_named_dimension("obstruction")
