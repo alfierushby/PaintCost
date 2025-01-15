@@ -13,6 +13,9 @@ if __name__ == '__main__':
 
     while walls:
         paint_area += get_named_dimension("wall")
-        response = str(input("Do you want to add another wall? (Y or N)"))
+        response = str(input("Do you want to add another wall? (Y or N)")).upper()
         if response == "N":
             walls = False
+
+    paint_area += get_named_dimension("Ceiling")
+
