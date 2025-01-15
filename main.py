@@ -16,7 +16,9 @@ if __name__ == '__main__':
         if response == "N":
             walls = False
 
-    paint_area += get_named_dimension_square("Ceiling")
+    response = str(input("Do you want to add the ceiling? (Y or N)")).upper()
+    if response == "Y":
+        paint_area += get_named_dimension_square("Ceiling")
 
     response = str(input("Do you want to add any obstructions on your walls that you won't paint? (Y or N)")).upper()
     if response == "Y":
