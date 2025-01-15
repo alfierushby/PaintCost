@@ -2,18 +2,18 @@ import math
 
 
 def get_named_dimension_square(name):
-    dimension_base = int(input(f"Enter the width of the {name} in meters: "))
-    dimension_height = int(input(f"Enter the height of the {name} in meters: "))
+    dimension_base = float(input(f"Enter the width of the {name} in meters: "))
+    dimension_height = float(input(f"Enter the height of the {name} in meters: "))
     return dimension_base * dimension_height
 
 def get_named_dimension_triangle(name):
-    dimension_base = int(input(f"Enter the base of the {name} in meters: "))
-    dimension_height = int(input(f"Enter the height of the {name} in meters: "))
+    dimension_base = float(input(f"Enter the base of the {name} in meters: "))
+    dimension_height = float(input(f"Enter the height of the {name} in meters: "))
     return (dimension_base * dimension_height)/2
 
 def get_named_dimension_ellipse(name):
-    dimension_base = int(input(f"Enter the a-axis of the {name} in meters: "))
-    dimension_height = int(input(f"Enter the b-axis of the {name} in meters: "))
+    dimension_base = float(input(f"Enter the a-axis of the {name} in meters: "))
+    dimension_height = float(input(f"Enter the b-axis of the {name} in meters: "))
     return math.pi * dimension_base * dimension_height
 
 def get_dimension(name):
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     if response == "Y":
         paint_area += get_dimension("Ceiling")
 
-    response = str(input("Do you want to add any obstructions on your walls that you won't paint? (Y or N): ")).upper()
+    response = str(input("Do you want to add any obstructions that you won't paint? (Y or N): ")).upper()
     if response == "Y":
         obstructions = True
         while obstructions:
