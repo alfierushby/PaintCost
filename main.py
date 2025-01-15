@@ -53,4 +53,5 @@ if __name__ == '__main__':
             if response == "N":
                 obstructions = False
 
-    print(f"The total cost of your paint is: {paint_area*paint_cost}")
+    print(f"The total cost of your paint is: £{paint_area*paint_cost}")
+    print(f"The area to paint is: {paint_area} square meters")
