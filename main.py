@@ -2,19 +2,29 @@ import math
 
 
 def get_named_dimension_square(name):
-    dimension_base = float(input(f"Enter the width of the {name} in meters: "))
-    dimension_height = float(input(f"Enter the height of the {name} in meters: "))
+    dimension_base = float(get_input_num(f"Enter the width of the {name} in meters: "))
+    dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
     return dimension_base * dimension_height
 
+
+def get_input_num(string):
+    val = float(input(string))
+    if val < 0:
+        print("Please enter a positive number")
+        return get_input_num(string)
+    return val
+
 def get_named_dimension_triangle(name):
-    dimension_base = float(input(f"Enter the base of the {name} in meters: "))
-    dimension_height = float(input(f"Enter the height of the {name} in meters: "))
-    return (dimension_base * dimension_height)/2
+    dimension_base = float(get_input_num(f"Enter the base of the {name} in meters: "))
+    dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
+    return (dimension_base * dimension_height) / 2
+
 
 def get_named_dimension_ellipse(name):
-    dimension_base = float(input(f"Enter the a-axis of the {name} in meters: "))
-    dimension_height = float(input(f"Enter the b-axis of the {name} in meters: "))
+    dimension_base = float(get_input_num(f"Enter the a-axis of the {name} in meters: "))
+    dimension_height = float(get_input_num(f"Enter the b-axis of the {name} in meters: "))
     return math.pi * dimension_base * dimension_height
+
 
 def get_dimension(name):
     dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse': "))
@@ -28,8 +38,9 @@ def get_dimension(name):
         case _:
             get_dimension(name)
 
+
 if __name__ == '__main__':
-    paint_cost = float(input("Enter the cost of your paint per square meter: "))
+    paint_cost = float(get_input_num("Enter the cost of your paint per square meter: "))
     paint_area = 0
 
     walls = True
@@ -53,5 +64,5 @@ if __name__ == '__main__':
             if response == "N":
                 obstructions = False
 
-    print(f"The total cost of your paint is: £{paint_area*paint_cost}")
+    print(f"The total cost of your paint is: £{paint_area * paint_cost}")
     print(f"The area to paint is: {paint_area} square meters")
