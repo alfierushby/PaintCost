@@ -29,24 +29,49 @@ def get_input_choice(string):
         print("Please enter a valid choice")
         get_input_choice(string)
     return val
+
+def double_check(string):
+    print(string)
+    choice = get_input_choice("Is this dimension correct? (Y/N): ")
+    if choice == "N":
+        return False
+    return True
+
+def try_again():
+    choice = get_input_choice("Do you want to try again? (Y/N): ")
+    if choice == "N":
+        return False
+    return True
+
 def get_named_dimension_square(name):
     dimension_base = float(get_input_num(f"Enter the width of the {name} in meters: "))
     dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
-    return dimension_base * dimension_height
-
+    if double_check(f"Width: {dimension_base}m\nHeight: {dimension_height}m"):
+        return dimension_base * dimension_height
+    if try_again():
+        return get_named_dimension_square(name)
+    return 0
 def get_named_dimension_triangle(name):
     dimension_base = float(get_input_num(f"Enter the base of the {name} in meters: "))
     dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
-    return (dimension_base * dimension_height) / 2
+    if double_check(f"Base: {dimension_base}m\nHeight: {dimension_height}m"):
+        return (dimension_base * dimension_height) / 2
+    if try_again():
+        return get_named_dimension_triangle(name)
+    return 0
 
 def get_named_dimension_ellipse(name):
     dimension_base = float(get_input_num(f"Enter the a-axis of the {name} in meters: "))
     dimension_height = float(get_input_num(f"Enter the b-axis of the {name} in meters: "))
-    return math.pi * dimension_base * dimension_height
+    if double_check(f"A-axis: {dimension_base}m\nB-axis: {dimension_height}m"):
+        return math.pi * dimension_base * dimension_height
+    if try_again():
+        return get_named_dimension_ellipse(name)
+    return 0
 
 def get_dimension(name):
     dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse', "
-                             f"or to go cancel with 'cancel': "))
+                             f"or to cancel with 'cancel': "))
     match dim_response:
         case 'square':
             return get_named_dimension_square(name)
