@@ -51,7 +51,8 @@ def try_again():
 def get_general_dimension(xaxis, yaxis, area_fun):
     dimension_x = float(get_input_num(f"Enter the {xaxis} in meters: "))
     dimension_y = float(get_input_num(f"Enter the {yaxis} in meters: "))
-    if double_check(f"{xaxis}: {dimension_x}m\n{yaxis}: {dimension_y}m"):
+    if double_check(f"{xaxis}: {dimension_x}m\n{yaxis}: {dimension_y}m\nArea: "
+                    f"{round(area_fun(dimension_x, dimension_y),3)}m"):
         return area_fun(dimension_x, dimension_y)
     if try_again():
         return get_general_dimension(xaxis, yaxis, area_fun)
@@ -63,11 +64,11 @@ def get_dimension(name):
                              f"or to cancel with 'cancel': "))
     match dim_response:
         case 'square':
-            return get_general_dimension("width", "height", lambda x, y: x * y)
+            return get_general_dimension("Width", "Height", lambda x, y: x * y)
         case 'triangle':
-            return get_general_dimension("base", "height", lambda x, y: (x * y) / 2)
+            return get_general_dimension("Base", "Height", lambda x, y: (x * y) / 2)
         case 'ellipse':
-            return get_general_dimension("a-axis", "b-axis", lambda x, y: math.pi * x * y)
+            return get_general_dimension("A-axis", "B-axis", lambda x, y: math.pi * x * y)
         case 'cancel':
             return 0
         case _:
@@ -100,5 +101,5 @@ if __name__ == '__main__':
             if response == "N":
                 break
 
-    print(f"The total cost of your paint is: £{paint_area * paint_cost}")
-    print(f"The area to paint is: {paint_area} square meters")
+    print(f"The total cost of your paint is: £{round(paint_area * paint_cost,2)}")
+    print(f"The area to paint is: {round(paint_area,3)} square meters")
