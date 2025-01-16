@@ -1,5 +1,6 @@
 import math
 
+
 def get_input_num(string):
     val = input(string)
     # Make sure it's a number being entered
@@ -17,6 +18,7 @@ def get_input_num(string):
         return get_input_num(string)
     return val
 
+
 def get_input_choice(string):
     val = str(input(string))
     try:
@@ -30,6 +32,7 @@ def get_input_choice(string):
         get_input_choice(string)
     return val
 
+
 def double_check(string):
     print(string)
     choice = get_input_choice("Is this dimension correct? (Y/N): ")
@@ -37,52 +40,39 @@ def double_check(string):
         return False
     return True
 
+
 def try_again():
     choice = get_input_choice("Do you want to try again? (Y/N): ")
     if choice == "N":
         return False
     return True
 
-def get_named_dimension_square(name):
-    dimension_base = float(get_input_num(f"Enter the width of the {name} in meters: "))
-    dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
-    if double_check(f"Width: {dimension_base}m\nHeight: {dimension_height}m"):
-        return dimension_base * dimension_height
+
+def get_general_dimension(xaxis, yaxis, area_fun):
+    dimension_x = float(get_input_num(f"Enter the {xaxis} in meters: "))
+    dimension_y = float(get_input_num(f"Enter the {yaxis} in meters: "))
+    if double_check(f"{xaxis}: {dimension_x}m\n{yaxis}: {dimension_y}m"):
+        return area_fun(dimension_x, dimension_y)
     if try_again():
-        return get_named_dimension_square(name)
-    return 0
-def get_named_dimension_triangle(name):
-    dimension_base = float(get_input_num(f"Enter the base of the {name} in meters: "))
-    dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
-    if double_check(f"Base: {dimension_base}m\nHeight: {dimension_height}m"):
-        return (dimension_base * dimension_height) / 2
-    if try_again():
-        return get_named_dimension_triangle(name)
+        return get_general_dimension(xaxis, yaxis, area_fun)
     return 0
 
-def get_named_dimension_ellipse(name):
-    dimension_base = float(get_input_num(f"Enter the a-axis of the {name} in meters: "))
-    dimension_height = float(get_input_num(f"Enter the b-axis of the {name} in meters: "))
-    if double_check(f"A-axis: {dimension_base}m\nB-axis: {dimension_height}m"):
-        return math.pi * dimension_base * dimension_height
-    if try_again():
-        return get_named_dimension_ellipse(name)
-    return 0
 
 def get_dimension(name):
     dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse', "
                              f"or to cancel with 'cancel': "))
     match dim_response:
         case 'square':
-            return get_named_dimension_square(name)
+            return get_general_dimension("width", "height", lambda x, y: x * y)
         case 'triangle':
-            return get_named_dimension_triangle(name)
+            return get_general_dimension("base", "height", lambda x, y: (x * y) / 2)
         case 'ellipse':
-            return get_named_dimension_ellipse(name)
+            return get_general_dimension("a-axis", "b-axis", lambda x, y: math.pi * x * y)
         case 'cancel':
             return 0
         case _:
             get_dimension(name)
+
 
 if __name__ == '__main__':
     print("This program will calculate the cost of painting a room.")

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bcba3c3-0cd3-461e-b6b5-7fed4b48c133" name="Changes" comment="Added input checking for the yes or no questions.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1736951427848</updated>
       <workItem from="1736951430516" duration="4576000" />
-      <workItem from="1737018084863" duration="2179000" />
+      <workItem from="1737018084863" duration="2649000" />
     </task>
     <task id="LOCAL-00001" summary="Added input checking for the yes or no questions.">
       <option name="closed" value="true" />
