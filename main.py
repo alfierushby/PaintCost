@@ -22,11 +22,11 @@ def get_input_choice(string):
     try:
         val = val.upper()
     except ValueError:
-        print("Please enter a valid choice (Y/N)")
+        print("Please enter a valid choice")
         get_input_choice(string)
 
     if val != "Y" and val != "N":
-        print("Please enter a valid choice (Y/N)")
+        print("Please enter a valid choice")
         get_input_choice(string)
     return val
 def get_named_dimension_square(name):
@@ -45,7 +45,8 @@ def get_named_dimension_ellipse(name):
     return math.pi * dimension_base * dimension_height
 
 def get_dimension(name):
-    dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse': "))
+    dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse', "
+                             f"or to go cancel with 'cancel': "))
     match dim_response:
         case 'square':
             return get_named_dimension_square(name)
@@ -53,20 +54,23 @@ def get_dimension(name):
             return get_named_dimension_triangle(name)
         case 'ellipse':
             return get_named_dimension_ellipse(name)
+        case 'cancel':
+            return 0
         case _:
             get_dimension(name)
 
 if __name__ == '__main__':
+    print("This program will calculate the cost of painting a room.")
+    print("You will choose the number of walls to paint and their dimensions, whether you want to paint your ceiling "
+          "and its dimension, and any obstructions that you won't paint on your walls and ceiling.")
     paint_cost = float(get_input_num("Enter the cost of your paint per square meter: "))
     paint_area = 0
 
-    walls = True
-
-    while walls:
-        paint_area += get_dimension("wall")
-        response = get_input_choice("Do you want to add another wall? (Y or N): ")
+    while True:
+        response = get_input_choice("Do you want to add a wall? (Y or N): ")
         if response == "N":
-            walls = False
+            break
+        paint_area += get_dimension("wall")
 
     response = get_input_choice("Do you want to add the ceiling? (Y or N): ")
     if response == "Y":
@@ -74,12 +78,12 @@ if __name__ == '__main__':
 
     response = get_input_choice("Do you want to add any obstructions that you won't paint? (Y or N): ")
     if response == "Y":
-        obstructions = True
-        while obstructions:
+
+        while True:
             paint_area -= get_dimension("obstruction")
             response = get_input_choice("Do you want to add another obstruction? (Y or N): ")
             if response == "N":
-                obstructions = False
+                break
 
     print(f"The total cost of your paint is: £{paint_area * paint_cost}")
     print(f"The area to paint is: {paint_area} square meters")
