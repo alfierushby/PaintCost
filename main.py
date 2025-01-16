@@ -17,6 +17,18 @@ def get_input_num(string):
         return get_input_num(string)
     return val
 
+def get_input_choice(string):
+    val = str(input(string))
+    try:
+        val = val.upper()
+    except ValueError:
+        print("Please enter a valid choice (Y/N)")
+        get_input_choice(string)
+
+    if val != "Y" and val != "N":
+        print("Please enter a valid choice (Y/N)")
+        get_input_choice(string)
+    return val
 def get_named_dimension_square(name):
     dimension_base = float(get_input_num(f"Enter the width of the {name} in meters: "))
     dimension_height = float(get_input_num(f"Enter the height of the {name} in meters: "))
@@ -52,20 +64,20 @@ if __name__ == '__main__':
 
     while walls:
         paint_area += get_dimension("wall")
-        response = str(input("Do you want to add another wall? (Y or N): ")).upper()
+        response = get_input_choice("Do you want to add another wall? (Y or N): ")
         if response == "N":
             walls = False
 
-    response = str(input("Do you want to add the ceiling? (Y or N): ")).upper()
+    response = get_input_choice("Do you want to add the ceiling? (Y or N): ")
     if response == "Y":
         paint_area += get_dimension("Ceiling")
 
-    response = str(input("Do you want to add any obstructions that you won't paint? (Y or N): ")).upper()
+    response = get_input_choice("Do you want to add any obstructions that you won't paint? (Y or N): ")
     if response == "Y":
         obstructions = True
         while obstructions:
             paint_area -= get_dimension("obstruction")
-            response = str(input("Do you want to add another obstruction? (Y or N): ")).upper()
+            response = get_input_choice("Do you want to add another obstruction? (Y or N): ")
             if response == "N":
                 obstructions = False
 
