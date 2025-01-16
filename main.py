@@ -52,7 +52,7 @@ def get_general_dimension(xaxis, yaxis, area_fun):
     dimension_x = float(get_input_num(f"Enter the {xaxis} in meters: "))
     dimension_y = float(get_input_num(f"Enter the {yaxis} in meters: "))
     if double_check(f"{xaxis}: {dimension_x}m\n{yaxis}: {dimension_y}m\nArea: "
-                    f"{round(area_fun(dimension_x, dimension_y),3)}m"):
+                    f"{round(area_fun(dimension_x, dimension_y),3)}m^2"):
         return area_fun(dimension_x, dimension_y)
     if try_again():
         return get_general_dimension(xaxis, yaxis, area_fun)
@@ -96,7 +96,6 @@ if __name__ == '__main__':
 
     response = get_input_choice("Do you want to add any obstructions that you won't paint? (Y or N): ")
     if response == "Y":
-
         while True:
             paint_area -= get_dimension("obstruction")
             response = get_input_choice("Do you want to add another obstruction? (Y or N): ")
@@ -104,4 +103,4 @@ if __name__ == '__main__':
                 break
 
     print(f"The total cost of your paint is: £{round(paint_area * paint_cost,2)}")
-    print(f"The area to paint is: {round(paint_area,3)} square meters")
+    print(f"The area to paint is: {round(paint_area,3)}m^2")
