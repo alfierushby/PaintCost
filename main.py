@@ -60,10 +60,10 @@ def get_general_dimension(xaxis, yaxis, area_fun):
 
 
 def get_dimension(name):
-    dim_response = str(input(f"Enter the shape of the {name} with the option of 'square', 'triangle', 'ellipse', "
+    dim_response = str(input(f"Enter the shape of the {name} with the option of 'rectangle', 'triangle', 'ellipse', "
                              f"or to cancel with 'cancel': "))
     match dim_response:
-        case 'square':
+        case 'rectangle':
             return get_general_dimension("Width", "Height", lambda x, y: x * y)
         case 'triangle':
             return get_general_dimension("Base", "Height", lambda x, y: (x * y) / 2)
@@ -72,7 +72,7 @@ def get_dimension(name):
         case 'cancel':
             return 0
         case _:
-            get_dimension(name)
+            return get_dimension(name)
 
 
 if __name__ == '__main__':
@@ -88,9 +88,11 @@ if __name__ == '__main__':
             break
         paint_area += get_dimension("wall")
 
-    response = get_input_choice("Do you want to add the ceiling? (Y or N): ")
-    if response == "Y":
-        paint_area += get_dimension("Ceiling")
+    while True:
+        response = get_input_choice("Do you want to add a ceiling? (Y or N): ")
+        if response == "N":
+            break
+        paint_area += get_dimension("ceiling")
 
     response = get_input_choice("Do you want to add any obstructions that you won't paint? (Y or N): ")
     if response == "Y":
